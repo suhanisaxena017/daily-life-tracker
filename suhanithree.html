@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ DAILY LIFE TRACKER ✨</title>
+
+<style>
+/* ENHANCED FONT IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;700&display=swap');
+
+/* BODY - ENHANCED */
+body{
+    margin:0;
+    font-family:'Poppins', 'Comic Sans MS', Arial, sans-serif;
+    text-align:center;
+    overflow-x:hidden;
+    font-weight:400;
+
+    background:
+    radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120,219,255,0.2) 0%, transparent 50%),
+    linear-gradient(rgba(255,255,255,0.85),rgba(255,255,255,0.75)),
+    url('https://i.pinimg.com/736x/9d/3d/e3/9d3de34f0f8f7f7ef6a27b9c85f6f6c.jpg');
+
+    background-size:cover;
+    background-attachment:fixed;
+    background-blend-mode:overlay;
+
+    border-left:20px solid #a0c4ff;
+    border-right:20px solid #ff8fab;
+    border-top:20px solid #ffb3c6;
+    border-bottom:20px solid #90dbf4;
+
+    box-sizing:border-box;
+    min-height:100vh;
+    position:relative;
+}
+
+/* ENHANCED SOFT OVERLAY WITH GLOW */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 70%),
+    rgba(255,255,255,0.65);
+    z-index:-2;
+    backdrop-filter:blur(2px);
+}
+
+/* BOLD GLOWING INNER BORDER */
+body::after{
+    content:"✨";
+    position:fixed;
+    top:18px;
+    left:18px;
+    right:18px;
+    bottom:18px;
+    border:5px dashed rgba(255,182,193,0.7);
+    border-radius:30px;
+    pointer-events:none;
+    z-index:-1;
+    font-size:0;
+    background:linear-gradient(45deg, rgba(255,182,193,0.3), rgba(160,196,255,0.3));
+    animation:borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow{
+    0%{box-shadow:0 0 20px rgba(255,182,193,0.4);}
+    100%{box-shadow:0 0 40px rgba(160,196,255,0.6), inset 0 0 40px rgba(255,182,193,0.3);}
+}
+
+/* FRONT PAGE - ENHANCED */
+#frontPage{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+    linear-gradient(135deg, rgba(255,240,248,0.95), rgba(240,248,255,0.95), rgba(255,248,240,0.92)),
+    url('https://i.pinimg.com/736x/9d/3d/e3/9d3de34f0f8f7f7ef6a27b9c85f6f6c.jpg');
+    background-size:cover;
+    background-blend-mode:soft-light;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    transition:all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ULTRA-ENHANCED QUOTE BOX */
+.quote{
+    font-size:38px;
+    font-weight:700;
+    font-family:'Dancing Script', cursive;
+    width:85%;
+    max-width:900px;
+    margin-bottom:70px;
+    line-height:1.5;
+    padding:40px 35px;
+    border-radius:35px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+    backdrop-filter:blur(20px) saturate(1.2);
+    border:5px solid;
+    border-image:linear-gradient(45deg, #ff8fab, #a0c4ff, #ffb3c6) 1;
+    box-shadow:
+    0 25px 50px rgba(0,0,0,0.2),
+    0 0 0 1px rgba(255,255,255,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+    animation:floatQuote 5s infinite ease-in-out;
+    text-shadow:0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing:1px;
+}
+
+.author{
+    display:block;
+    margin-top:20px;
+    font-size:26px;
+    font-weight:600;
+    color:#ff4d8d !important;
+    font-style:italic;
+    text-shadow:0 2px 8px rgba(255,77,141,0.4);
+}
+
+@keyframes floatQuote{
+    0%,100%{transform:translateY(0px) rotateX(0deg);}
+    33%{transform:translateY(-12px) rotateX(2deg);}
+    66%{transform:translateY(-6px) rotateX(-1deg);}
+}
+
+/* ULTIMATE START BUTTON */
+#startButton{
+    background:linear-gradient(145deg, #ff8fab, #a0c4ff, #ffb3c6, #90dbf4);
+    background-size:300% 300%;
+    animation:gradientShift 4s ease infinite;
+    border:none;
+    padding:25px 50px;
+    font-size:26px;
+    font-weight:800;
+    font-family:'Poppins', sans-serif;
+    border-radius:60px;
+    cursor:pointer;
+    color:#fff;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    box-shadow:
+    0 20px 40px rgba(255,143,171,0.4),
+    0 0 0 1px rgba(255,255,255,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+    transition:all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position:relative;
+    overflow:hidden;
+    text-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+
+@keyframes gradientShift{
+    0%,100%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+}
+
+#startButton:hover{
+    transform:scale(1.12) translateY(-10px);
+    box-shadow:
+    0 30px 60px rgba(255,105,180,0.6),
+    0 0 40px rgba(160,196,255,0.8),
+    0 0 0 1px rgba(255,255,255,0.5);
+    letter-spacing:3px;
+}
+
+/* ENHANCED SHINY EFFECT */
+#startButton::before{
+    content:'✨';
+    position:absolute;
+    top:50%;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    transform:translateY(-50%) skewX(-25deg);
+    transition:0.8s;
+}
+
+#startButton:hover::before{
+    left:120%;
+}
+
+/* BOLD HEADINGS */
+h1{
+    margin-top:30px;
+    color:#ff4d8d;
+    font-size:52px;
+    font-weight:900;
+    font-family:'Poppins', sans-serif;
+    text-shadow:
+    0 0 10px rgba(255,77,141,0.6),
+    2px 2px 8px rgba(255,255,255,0.9),
+    0 4px 12px rgba(0,0,0,0.2);
+    animation:glowPulse 2.5s infinite alternate;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+@keyframes glowPulse{
+    0%{
+        transform:scale(1) rotate(-1deg);
+        filter:drop-shadow(0 0 10px rgba(255,77,141,0.6));
+    }
+    100%{
+        transform:scale(1.05) rotate(1deg);
+        filter:drop-shadow(0 0 25px rgba(255,77,141,0.9));
+    }
+}
+
+.subtitle{
+    color:#555;
+    font-size:24px;
+    font-weight:700;
+    margin:20px 0;
+    text-shadow:1px 1px 3px rgba(255,255,255,0.8);
+    letter-spacing:1px;
+}
+
+/* ENHANCED CLOCK */
+.clock{
+    font-size:32px;
+    margin:25px 0;
+    font-weight:800;
+    color:#333;
+    background:linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    display:inline-block;
+    padding:18px 35px;
+    border-radius:30px;
+    border:4px solid;
+    border-image:linear-gradient(45deg, #ff8fab, #a0c4ff) 1;
+    backdrop-filter:blur(15px);
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+    animation:pulseClock 2s infinite;
+}
+
+@keyframes pulseClock{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.02);}
+}
+
+/* MAIN BUTTONS - ULTRA ENHANCED */
+.main-buttons{
+    margin-top:40px;
+}
+
+.main-buttons button{
+    padding:25px 40px;
+    margin:15px;
+    border:none;
+    border-radius:30px;
+    font-size:22px;
+    font-weight:700;
+    cursor:pointer;
+    color:#444;
+    background:linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));
+    backdrop-filter:blur(20px);
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+    transition:all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position:relative;
+    overflow:hidden;
+    font-family:'Poppins', sans-serif;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    text-shadow:0 1px 2px rgba(255,255,255,0.8);
+}
+
+.main-buttons button:hover{
+    transform:translateY(-12px) scale(1.08);
+    background:linear-gradient(145deg, #fff0f7, #f0f8ff);
+    box-shadow:
+    0 25px 50px rgba(255,105,180,0.5),
+    0 0 30px rgba(173,216,230,0.7),
+    inset 0 1px 0 rgba(255,255,255,1);
+    color:#ff4d8d;
+    font-weight:800;
+}
+
+/* RIPPLE EFFECT */
+.main-buttons button::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:0;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.8), transparent);
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    transition:width 0.6s, height 0.6s;
+}
+
+.main-buttons button:hover::after,
+.main-buttons button:active::after{
+    width:400px;
+    height:400px;
+}
+
+/* DAY BUTTONS - SUPER ENHANCED */
+.days-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:30px;
+    width:90%;
+    margin:50px auto;
+    padding:20px;
+}
+
+.day-btn{
+    padding:30px;
+    border:none;
+    border-radius:35px;
+    font-size:26px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+    transition:all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation:floating 4s infinite ease-in-out;
+    font-family:'Poppins', sans-serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    position:relative;
+    overflow:hidden;
+    text-shadow:0 2px 4px rgba(0,0,0,0.2);
+}
+
+.day-btn::before{
+    content:attr(data-emoji);
+    display:block;
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.day-btn:hover{
+    transform:translateY(-15px) rotate(-3deg) scale(1.08);
+    box-shadow:
+    0 35px 70px rgba(0,0,0,0.35),
+    0 0 40px rgba(255,182,193,0.7);
+    font-size:28px;
+    letter-spacing:3px;
+    text-shadow:
+    0 0 15px rgba(255,255,255,0.8),
+    2px 2px 8px rgba(0,0,0,0.3);
+}
+
+@keyframes floating{
+    0%,100%{transform:translateY(0px) rotate(0deg);}
+    33%{transform:translateY(-8px) rotate(1deg);}
+    66%{transform:translateY(-4px) rotate(-1deg);}
+}
+
+/* COLOR ENHANCEMENTS */
+.day1{ background:linear-gradient(145deg, #ffcad4, #ffb3c6); }
+.day2{ background:linear-gradient(145deg, #caffbf, #b8e6b0); }
+.day3{ background:linear-gradient(145deg, #a0c4ff, #90dbf4); }
+.day4{ background:linear-gradient(145deg, #ffd6a5, #ffcc99); }
+.day5{ background:linear-gradient(145deg, #bdb2ff, #b8a9ff); }
+.day6{ background:linear-gradient(145deg, #fdffb6, #fff2a8); }
+.day7{ background:linear-gradient(145deg, #9bf6ff, #a0f0ff); }
+
+/* ENHANCED POPUP */
+.popup{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    z-index:200;
+    padding-top:50px;
+    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.5);
+}
+
+.popup-content{
+    width:90%;
+    max-width:800px;
+    margin:auto;
+    background:linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+    backdrop-filter:blur(25px) saturate(1.3);
+    border-radius:40px;
+    padding:45px;
+    border:5px solid;
+    border-image:linear-gradient(45deg, #ff8fab, #a0c4ff, #ffb3c6) 1;
+    box-shadow:
+    0 30px 80px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.9),
+    inset 0 1px 0 rgba(255,255,255,1);
+    transition:all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation:popupSlide 0.5s ease-out;
+}
+
+@keyframes popupSlide{
+    0%{transform:scale(0.7) translateY(-50px); opacity:0;}
+    100%{transform:scale(1) translateY(0); opacity:1;}
+}
+
+.popup-content:hover{
+    transform:scale(1.02);
+    box-shadow:
+    0 40px 100px rgba(0,0,0,0.4),
+    0 0 50px rgba(255,182,193,0.6),
+    0 0 60px rgba(173,216,230,0.6);
+}
+
+/* ENHANCED TEXTAREA */
+textarea{
+    width:95%;
+    height:280px;
+    padding:25px;
+    border-radius:25px;
+    border:3px solid rgba(255,192,203,0.4);
+    background:linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+    font-size:20px;
+    font-weight:500;
+    font-family:'Poppins', sans-serif;
+    resize:none;
+    box-shadow:
+    inset 0 4px 15px rgba(0,0,0,0.08),
+    0 10px 25px rgba(0,0,0,0.15);
+    backdrop-filter:blur(10px);
+    line-height:1.6;
+    transition:all 0.3s ease;
+}
+
+textarea:focus{
+    outline:none;
+    border-color:rgba(255,77,141,0.8);
+    box-shadow:
+    inset 0 4px 15px rgba(0,0,0,0.1),
+    0 15px 35px rgba(255,77,141,0.3);
+    transform:scale(1.01);
+}
+
+/* SUPER ENHANCED SAVE BUTTONS */
+.save-btn,.close-btn{
+    margin:15px 12px 5px;
+    padding:20px 40px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:20px;
+    font-weight:800;
+    transition:all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family:'Poppins', sans-serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    text-shadow:0 2px 4px rgba(0,0,0,0.2);
+    position:relative;
+    overflow:hidden;
+}
+
+.save-btn{
+    background:linear-gradient(145deg, #8ecae6, #4dabf7);
+    color:#fff;
+    box-shadow:0 15px 35px rgba(142,202,230,0.5);
+}
+
+.close-btn{
+    background:linear-gradient(145deg, #ff8fab, #ff6b9d);
+    color:#fff;
+    box-shadow:0 15px 35px rgba(255,143,171,0.5);
+}
+
+.save-btn:hover,.close-btn:hover{
+    transform:scale(1.12) translateY(-8px);
+    box-shadow:
+    0 25px 50px rgba(0,0,0,0.3),
+    0 0 30px rgba(255,255,255,0.6);
+    letter-spacing:3px;
+}
+
+/* MEDICINE TRACKER - ENHANCED */
+.scroll-box{
+    overflow:auto;
+    max-height:550px;
+    margin-top:30px;
+    padding:20px;
+    background:rgba(255,255,255,0.8);
+    border-radius:25px;
+}
+
+table{
+    border-collapse:collapse;
+    width:100%;
+    margin:auto;
+    font-family:'Poppins', sans-serif;
+}
+
+th,td{
+    border:2px solid rgba(255,192,203,0.6);
+    padding:18px 12px;
+    text-align:center;
+    font-weight:600;
+}
+
+th{
+    background:linear-gradient(145deg, #ffc8dd, #ffb3c6);
+    position:sticky;
+    top:0;
+    font-size:16px;
+    font-weight:800;
+    color:#333;
+    text-shadow:0 1px 2px rgba(255,255,255,0.8);
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+input[type="text"], input[type="number"]{
+    width:140px;
+    padding:15px;
+    border:2px solid rgba(255,192,203,0.4);
+    border-radius:15px;
+    background:linear-gradient(145deg, #f8f9fa, #ffffff);
+    font-size:16px;
+    font-weight:600;
+    font-family:'Poppins', sans-serif;
+    transition:all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus{
+    outline:none;
+    border-color:#ff8fab;
+    box-shadow:0 0 20px rgba(255,143,171,0.4);
+    transform:scale(1.05);
+}
+
+/* EXPENSE TRACKER - ULTRA ENHANCED */
+.expense-container{
+    width:95%;
+    max-width:1000px;
+    margin:50px auto;
+    background:linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+    border-radius:40px;
+    padding:50px;
+    backdrop-filter:blur(25px);
+    border:5px solid;
+    border-image:linear-gradient(45deg, #ff8fab, #a0c4ff) 1;
+    box-shadow:
+    0 30px 80px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,1);
+    transition:all 0.5s ease;
+}
+
+.expense-container:hover{
+    transform:translateY(-10px);
+    box-shadow:
+    0 50px 100px rgba(0,0,0,0.35),
+    0 0 50px rgba(255,182,193,0.6);
+}
+
+.expense-day{
+    background:linear-gradient(145deg, #fff7fb, #fff0f7);
+    margin-bottom:35px;
+    padding:35px;
+    border-radius:30px;
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,1);
+    border:3px solid rgba(255,192,203,0.3);
+    transition:all 0.4s ease;
+}
+
+.expense-day:hover{
+    transform:translateY(-8px);
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.2),
+    0 0 25px rgba(255,182,193,0.4);
+}
+
+.expense-day h3{
+    text-align:left;
+    color:#333;
+    margin-bottom:30px;
+    font-size:28px;
+    font-weight:800;
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(145deg, #ff8fab, #a0c4ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.expense-inputs{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+input[type="number"]{
+    padding:18px 20px;
+    border-radius:20px;
+    border:3px solid rgba(255,192,203,0.4);
+    background:linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,249,250,0.9));
+    font-size:18px;
+    font-weight:700;
+    min-width:160px;
+    transition:all 0.3s ease;
+}
+
+input[type="number"]:focus{
+    transform:scale(1.08);
+    border-color:#ff8fab;
+    box-shadow:
+    0 10px 30px rgba(255,143,171,0.4),
+    inset 0 2px 8px rgba(255,255,255,0.9);
+}
+
+.day-total{
+    margin-top:30px;
+    background:linear-gradient(145deg, #fff0c7, #ffeaa7);
+    color:#333;
+    font-size:26px;
+    font-weight:900;
+    padding:20px 30px;
+    border-radius:25px;
+    border:4px solid rgba(255,193,7,0.6);
+    box-shadow:
+    0 15px 40px rgba(255,193,7,0.4),
+    inset 0 1px 0 rgba(255,255,255,1);
+    letter-spacing:2px;
+    font-family:'Poppins', sans-serif;
+    text-transform:uppercase;
+}
+
+#finalWeeklyTotal{
+    margin-top:45px;
+    background:linear-gradient(145deg, #000, #333);
+    color:#ffd700;
+    font-size:36px;
+    font-weight:900;
+    padding:30px 50px;
+    border-radius:30px;
+    border:5px solid #ffd700;
+    box-shadow:
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 50px rgba(255,215,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+    letter-spacing:4px;
+    font-family:'Poppins', sans-serif;
+    text-transform:uppercase;
+    animation:moneyGlow 2s infinite alternate;
+}
+
+@keyframes moneyGlow{
+    0%{box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 50px rgba(255,215,0,0.6);}
+    100%{box-shadow:0 40px 100px rgba(0,0,0,0.6), 0 0 80px rgba(255,215,0,0.9);}
+}
+
+/* RESPONSIVE IMPROVEMENTS */
+@media (max-width:768px){
+    .quote{font-size:28px; padding:25px;}
+    h1{font-size:40px;}
+    .day-btn{font-size:22px; padding:25px;}
+    .popup-content{padding:30px 20px;}
+    .days-container{gap:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- FRONT PAGE -->
+<div id="frontPage">
+    <div id="quoteBox" class="quote"></div>
+    <button id="startButton">
+        🌟 Plan Your Week Accordingly 🌟
+    </button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent" style="display:none;">
+
+<h1>🌸 DAILY LIFE TRACKER 🌸</h1>
+
+<p class="subtitle">
+    💎 Plan your day, Track your Spendings and Manage Medicines — all in one place 💎
+</p>
+
+<div class="clock" id="liveClock"></div>
+
+<div class="main-buttons">
+<button onclick="showPlanner()">📅 Daily Planner</button>
+<button onclick="showMedicineTracker()">💊 Medicine Tracker</button>
+<button onclick="showExpenseTracker()">💸 Expense Tracker</button>
+</div>
+
+<!-- DAILY PLANNER -->
+<div id="plannerSection">
+
+<div class="days-container">
+<button class="day-btn day1" data-emoji="🌸" onclick="openPlanner(1)">DAY 1</button>
+<button class="day-btn day2" data-emoji="🍃" onclick="openPlanner(2)">DAY 2</button>
+<button class="day-btn day3" data-emoji="☀️" onclick="openPlanner(3)">DAY 3</button>
+<button class="day-btn day4" data-emoji="🌺" onclick="openPlanner(4)">DAY 4</button>
+<button class="day-btn day5" data-emoji="💫" onclick="openPlanner(5)">DAY 5</button>
+<button class="day-btn day6" data-emoji="🌙" onclick="openPlanner(6)">DAY 6</button>
+<button class="day-btn day7" data-emoji="⭐" onclick="openPlanner(7)">DAY 7</button>
+</div>
+</div>
+
+<!-- POPUP -->
+<div id="plannerPopup" class="popup">
+<div class="popup-content">
+<h2 id="plannerTitle" style="font-size:32px; font-weight:800; margin-bottom:30px; color:#ff4d8d; text-shadow:0 4px 12px rgba(255,77,141,0.4);"></h2>
+<textarea id="plannerText" placeholder="✨ Write your tasks, goals, and dreams here... Be specific and detailed! ✨"></textarea>
+<br>
+<button class="save-btn" onclick="savePlanner()">💾 Save Planner</button>
+<button class="close-btn" onclick="closePlanner()">❌ Close</button>
+</div>
+</div>
+
+<!-- MEDICINE TRACKER -->
+<div id="medicineSection" style="display:none;">
+<div class="popup-content" style="max-width:1200px;">
+<h2 style="font-size:34px; font-weight:900; background:linear-gradient(145deg, #ff8fab, #a0c4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:30px;">💊 Weekly Medicine Tracker</h2>
+<div class="scroll-box">
+<table>
+<thead>
+<tr>
+<th>⏰ Time</th>
+<th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+</tr>
+</thead>
+<tbody id="medicineTable"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- EXPENSE TRACKER -->
+<div id="expenseSection" style="display:none;">
+<div class="expense-container">
+<h2 style="font-size:36px; font-weight:900; background:linear-gradient(145deg, #ff8fab, #a0c4ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:40px;">💸 Weekly Expense Tracker</h2>
+<div id="expenseDays"></div>
+<div id="finalWeeklyTotal">
+💰 Weekly Expense Total: ₹0
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+/* QUOTES - ENHANCED */
+const quotes = [
+{ text:"✨ The future depends on what you do today.", author:"— Mahatma Gandhi" },
+{ text:"🌸 Believe you can and you're halfway there.", author:"— Theodore Roosevelt" },
+{ text:"💫 Success is the sum of small efforts repeated daily.", author:"— Robert Collier" },
+{ text:"🌈 Start where you are. Use what you have. Do what you can.", author:"— Arthur Ashe" },
+{ text:"🌷 Discipline is choosing between what you want now and what you want most.", author:"— Abraham Lincoln" },
+{ text:"⭐ Your only limit may be your imagination.", author:"— Franklin D. Roosevelt" },
+{ text:"💎 The best time to plant a tree was 20 years ago. The second best time is now.", author:"— Chinese Proverb" }
+];
+
+const colors = ["#ff6b6b","#ff9f1c","#2ec4b6","#8338ec","#3a86ff","#ff006e","#ffd23f"];
+let qIndex = 0;
+
+const quoteBox = document.getElementById("quoteBox");
+
+function showQuote(){
+    const quote = quotes[qIndex];
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    quoteBox.style.color = color;
+    quoteBox.style.textShadow = `0 0 20px ${color}`;
+    quoteBox.innerHTML = `${quote.text}<span class="author">${quote.author}</span>`;
+    qIndex = (qIndex + 1) % quotes.length;
+}
+
+showQuote();
+setInterval(showQuote, 4000);
+
+/* START BUTTON */
+document.getElementById("startButton").onclick = ()=>{
+    const f = document.getElementById("frontPage");
+    f.style.opacity = "0";
+    f.style.transform = "scale(0.95)";
+    setTimeout(()=>{
+        f.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("mainContent").style.opacity = "0";
+        document.getElementById("mainContent").style.transform = "scale(0.98)";
+        setTimeout(()=>{
+            document.getElementById("mainContent").style.transition = "all 0.8s ease";
+            document.getElementById("mainContent").style.opacity = "1";
+            document.getElementById("mainContent").style.transform = "scale(1)";
+        }, 100);
+    }, 1200);
+};
+
+/* ENHANCED CLOCK */
+function updateClock(){
+    let now = new Date();
+    document.getElementById("liveClock").innerHTML =
+    `🕐 Current Time: ${now.toLocaleTimeString('en-IN', {hour12: true})}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* SECTION SWITCH */
+function showPlanner(){
+    document.getElementById("plannerSection").style.display = "block";
+    document.getElementById("medicineSection").style.display = "none";
+    document.getElementById("expenseSection").style.display = "none";
+}
+
+function showMedicineTracker(){
+    document.getElementById("plannerSection").style.display = "none";
+    document.getElementById("medicineSection").style.display = "block";
+    document.getElementById("expenseSection").style.display = "none";
+}
+
+function showExpenseTracker(){
+    document.getElementById("plannerSection").style.display = "none";
+    document.getElementById("medicineSection").style.display = "none";
+    document.getElementById("expenseSection").style.display = "block";
+}
+
+/* DAILY PLANNER */
+let currentDay = 1;
+const pastelColors = {
+    1:"#ffcad4", 2:"#caffbf", 3:"#a0c4ff", 4:"#ffd6a5",
+    5:"#bdb2ff", 6:"#fdffb6", 7:"#9bf6ff"
+};
+
+function openPlanner(day){
+    currentDay = day;
+    const popup = document.getElementById("plannerPopup");
+    popup.style.display = "block";
+    popup.style.background = `radial-gradient(circle, ${pastelColors[day]}20, transparent)`;
+    document.getElementById("plannerTitle").innerHTML = `📅 Planner For DAY ${day} ✨`;
+    document.getElementById("plannerText").value = localStorage.getItem("plannerDay"+day) || "";
+    document.getElementById("plannerText").focus();
+}
+
+function closePlanner(){
+    document.getElementById("plannerPopup").style.display = "none";
+}
+
+function savePlanner(){
+    localStorage.setItem("plannerDay"+currentDay, document.getElementById("plannerText").value);
+    const btn = event.target;
+    btn.innerHTML = "✅ SAVED!";
+    btn.style.background = "linear-gradient(145deg, #4CAF50, #45a049)";
+    setTimeout(()=>{
+        btn.innerHTML = "💾 Save Planner";
+        btn.style.background = "linear-gradient(145deg, #8ecae6, #4dabf7)";
+    }, 1500);
+}
+
+/* MEDICINE TABLE */
+const times = ["1 AM","2 AM","3 AM","4 AM","5 AM","6 AM","7 AM","8 AM","9 AM","10 AM","11 AM","12 PM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM","7 PM","8 PM","9 PM","10 PM","11 PM","12 AM"];
+const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+
+let tableHTML = "";
+times.forEach(t => {
+    tableHTML += `<tr><td style="background:linear-gradient(145deg, #ffe5ec, #ffc8dd); font-weight:900; font-size:16px;">${t}</td>`;
+    days.forEach(() => tableHTML += `<td><input type="text" placeholder="Medicine" onfocus="this.placeholder=''"></td>`);
+    tableHTML += "</tr>";
+});
+document.getElementById("medicineTable").innerHTML = tableHTML;
+
+/* EXPENSE TRACKER */
+const weekDays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const expContainer = document.getElementById('expenseDays');
+
+weekDays.forEach((day) => {
+    let html = `
+    <div class="expense-day">
+        <h3>${day}</h3>
+        <div class="expense-inputs">`;
+    for(let j = 1; j <= 5; j++){
+        html += `<input type="number" id="${day.slice(0,3).toLowerCase()}${j}" placeholder="₹ Expense ${j}" oninput="calculateExpenses()" onfocus="this.placeholder=''">`;
+    }
+    html += `</div><div class="day-total" id="${day.toLowerCase()}Total">Total: ₹0</div></div>`;
+    expContainer.innerHTML += html;
+});
+
+function getValue(id){ return Number(document.getElementById(id).value) || 0; }
+
+function calculateExpenses(){
+    function sum(prefix){
+        let t = 0;
+        for(let i = 1; i <= 5; i++) t += getValue(prefix + i);
+        return t;
+    }
+    
+    const [mon,tue,wed,thu,fri,sat,sun] = ['mon','tue','wed','thu','fri','sat','sun'].map(p => sum(p));
+    
+    ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].forEach((day, i) => {
+        const amounts = [mon,tue,wed,thu,fri,sat,sun];
+        document.getElementById(day + "Total").innerHTML = `Total: ₹${amounts[i].toLocaleString('en-IN')}`;
+    });
+    
+    const total = mon + tue + wed + thu + fri + sat + sun;
+    document.getElementById("finalWeeklyTotal").innerHTML = `💰 Weekly Expense Total: ₹${total.toLocaleString('en-IN')}`;
+}
+</script>
+
+</body>
+</html>
